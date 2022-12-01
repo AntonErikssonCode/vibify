@@ -1,0 +1,26 @@
+.MenuItem-container{
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  color: white;
+
+  
+}
+
+.MenuItem-title{
+  font-size: 1rem;
+  font-weight: 100;
+
+}
+
+.MenuItem-button{
+ background-color: #36e572;
+ padding: 12px 24px;
+ border-radius: 0.2rem;
+ font-size: 1.4rem;
+ font-weight: 600;
+ color: black;
+ box-shadow: black 2px 2px 5px;
+ 
+
+}

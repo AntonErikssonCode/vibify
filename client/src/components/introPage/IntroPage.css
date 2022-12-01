@@ -1,0 +1,34 @@
+.IntroPage-container{
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(
+    50deg,
+    hsl(0deg 0% 0%) 0%,
+    
+    #7802fe 100%
+  );display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: rgb(255, 255, 255);
+}
+
+.IntroPage-titel{
+  font-size: 6rem;
+  margin: 0;
+
+}
+
+.IntroPage-subtitle{
+  font-size: 2rem;
+  margin: 0;
+  font-weight: 100;
+
+}
+
+.IntroPage-menu{
+  display: flex;
+  gap: 6rem;
+  padding: 4rem;
+
+}

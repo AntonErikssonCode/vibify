@@ -1,0 +1,112 @@
+.dashboard-container{
+  background-color: grey;
+  position: relative;
+  height: 100%;
+
+}
+
+
+.dashboard-search-container{
+  background-color: rgb(33, 33, 33);
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+
+  
+}
+.dashboard-search-container input{
+ width: 50%;
+ margin: 0.4rem;
+ font-size: 1.6rem;
+ padding: 0.2rem;
+ border-radius: 0.5rem;
+ background-color: rgb(184, 184, 184);
+ border: none;
+
+  
+}
+.dashboard-search-container input:focus{
+  outline: none;
+}
+
+.dashboard-results-container{
+  background-color: rgb(16, 16, 16);
+  height: 100%;
+  color: white;
+  overflow:scroll;
+  
+  width: 30%;
+  
+}
+.dashboard-canvas{
+  height: 100%;
+  width: 70%;
+}
+
+.dashboard-content{
+  margin-top: 3rem;
+  height: 90vh;
+  display: flex;
+}
+.dashboard-player-container{
+ position: fixed;
+ bottom: 0;
+ width: 100%;
+ z-index: 3;
+
+
+  
+}
+
+.dashboard-player-timer{
+  position: absolute;
+  top: 0;
+  left: 20%;
+  margin: 0;
+}
+
+.dashboard-segements-container{
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  height: 20px;
+  width: 100vw;
+/*   background-color: blue; */
+  display: flex;
+}
+
+.dashboard-segment{
+  height: 20px;
+  z-index: 2;
+ 
+}
+
+.dashboard-bars-container{
+  position: absolute;
+  bottom: 70px;
+  left: 0;
+  height: 20px;
+  width: 100vw;
+/*   background-color: blue; */
+  display: flex;
+}
+.dashboard-bars{
+  height: 20px;
+  z-index: 2;
+ 
+}
+.white-bar{
+  background-color: #252525;
+}
+
+.debugThing{
+  margin: 0;
+  
+  z-index: 5;
+  position: absolute;
+  top: 10vh;
+  right: 5vw;
+}
+
