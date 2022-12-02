@@ -13,7 +13,7 @@ const spotifyApi = new SpotifyWebApi({
 
 function Dashboard({ code }) {
   const accessToken = useAuth(code);
-  const [search, setSearch] = useState("r");
+  const [search, setSearch] = useState("aretha frankli");
   const [searchResults, setSearchResults] = useState([]);
   const [playingTrack, setPlayingTrack] = useState();
   const [canvas, setCanvas] = useState(false);
@@ -116,8 +116,8 @@ function Dashboard({ code }) {
 
     if (isActive && isPaused === false) {
       interval = setInterval(() => {
-        setTime((time) => time + 10);
-      }, 10);
+        setTime((time) => time + 100);
+      }, 100);
      
     } else {
       clearInterval(interval);

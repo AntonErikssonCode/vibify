@@ -3,5 +3,5 @@
 }
 
 .coverScreen{
-  z-index: 4;
+  z-index: -10;
 }

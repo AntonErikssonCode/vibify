@@ -4,7 +4,7 @@ import * as THREE from 'three';
 /* import { VisualizationCard } from '@components/visulaization-card';
 import { useTweak } from '@components/use-tweak'; */
 import { Scene } from './scene';
-import { Grid3D } from './grid';
+/* import { Grid3D } from './grid'; */
 import { Controls } from './controls';
 import './noise-material';
 
@@ -68,11 +68,11 @@ function Noiseee (props) {
       }
     /> */
     <>
-    <Grid3D />
+   {/*  <Grid3D /> */}
     <NoiseSphere
       ref={sphere}
-      amplitude={5}
-      frequency={5}
+      amplitude={3}
+      frequency={3}
     />
     </>
   );

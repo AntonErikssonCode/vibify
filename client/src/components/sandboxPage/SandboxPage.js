@@ -5,7 +5,7 @@ import SandboxShape from "../3DComponents/SandboxShape";
 import "./SandboxPage.css";
 import { createNoise2D } from "simplex-noise";
 import Background from "../background/Background";
-import Noiseee from "../../sandbox/3dNoise";
+import Noiseee from "../../distoredSphereTest/3dNoise";
 function SandboxPage(props) {
   const noise2D = createNoise2D();
   console.log(noise2D(10, 10));
@@ -23,8 +23,8 @@ function SandboxPage(props) {
         <ambientLight intensity={0.1} />
         <spotLight position={[50, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -10, -10]} />
-     {/*    <SandboxShape /> */}
-        <Noiseee/>
+        <SandboxShape />
+     {/*    <Noiseee/> */}
       </Canvas>
     </div>
   );

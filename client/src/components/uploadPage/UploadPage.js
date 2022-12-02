@@ -75,6 +75,11 @@ function UploadPage(props) {
           "complexSpectrum",
         ],
         callback: (features) => {
+          console.dir(features.amplitudeSpectrum);
+          console.dir(features.chroma);
+          console.dir(features.spectralFlatness);
+          console.dir(features.powerSpectrum);
+          console.dir("   ");
           setRms(features.rms);
           setZcr(features.zcr);
           setEnergy(features.energy);
