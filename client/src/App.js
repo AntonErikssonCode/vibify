@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UploadPage from "./components/uploadPage/UploadPage";
 import SandboxPage from "./components/sandboxPage/SandboxPage";
 import Dashboard from "./components/spotifyPage/Dashboard";
+import DemoPage from "./components/demoPage/DemoPage";
 
 const code = new URLSearchParams(window.location.search).get("code");
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" exact element={<IntroPage />} />
         <Route path="upload" exact element={<UploadPage />} />
         <Route path="sandbox" exact element={<SandboxPage />} />
+        <Route path="demo" exact element={<DemoPage />} />
       </Routes>
     </BrowserRouter>
 
