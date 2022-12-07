@@ -8,13 +8,11 @@ import OutputCanvas from "../3DComponents/OutputCanvas";
 import WebPlayback from "../SpotifyPlayer";
 
 const spotifyApi = new SpotifyWebApi({
-  clientId: "e1e42dc2ef98422c8bb7a97f90120da7",
+  clientId: process.env.REACT_APP_CLIENT_KEY,
 });
 
 function Dashboard({ code }) {
   const accessToken = useAuth(code);
-
-
 
   const [search, setSearch] = useState("aretha frankli");
   const [searchResults, setSearchResults] = useState([]);
@@ -22,6 +20,7 @@ function Dashboard({ code }) {
   const [canvas, setCanvas] = useState(false);
   const [duration, setDuration] = useState(0);
   const [sections, setSections] = useState([]);
+  const [reachedSections, setReachedSections] = useState([]);
   const [bars, setBars] = useState([]);
   const [startAt, setStartAt] = useState();
   const [progression, setProgression] = useState(0);
@@ -31,7 +30,7 @@ function Dashboard({ code }) {
   const [isPaused, setIsPaused] = useState(true);
   const [time, setTime] = useState(0);
   const [deviceID, setDeviceID] = useState(0);
-  
+
   function handleDeviceId(deviceID) {
     setDeviceID(deviceID);
   }
@@ -44,22 +43,20 @@ function Dashboard({ code }) {
         setPlayingTrack(track);
         console.dir(track);
         setCanvas(true);
-        /*         console.dir(track.audio.bars[0].start);
-         */ setStartAt(track.audio.bars[0].start);
+        setStartAt(track.audio.bars[0].start);
         setSections(
           track.audio.sections.map((section) => {
-            return section.duration;
+            return section;
           })
         );
+
         setBars(
           track.audio.bars.map((bar) => {
             return bar.duration;
           })
         );
         setDuration(track.audio.track.duration);
-        /* console.dir(track.audio); */
       });
-      /*  console.dir(duration); */
     });
   }
 
@@ -94,27 +91,25 @@ function Dashboard({ code }) {
     console.dir("Time = " + newTime);
     console.dir("Progression = " + newProgression);
     console.dir("Time + Progression = " + newTime + newProgression);
-    setRealProgression( newTime + newProgression);
+    setRealProgression(newTime + newProgression);
   };
 
-
-  async function getDevices(){
-    // 	https://api.spotify.com/v1/me/player/devices
-
-    fetch('http://example.com/movies.json')
-  .then((response) => response.json())
-  .then((data) => console.log(data));
-
-
+  async function fetchTrackPosition() {
+    spotifyApi.getMyCurrentPlaybackState().then((res) => {
+      if (res.body === null) return;
+      console.dir(res.body.progress_ms);
+      setRealProgression(res.body.progress_ms/1000);
+    });
+   
   }
+
+
+  
 
   useEffect(() => {
     if (!accessToken) return;
     spotifyApi.setAccessToken(accessToken);
   }, [accessToken]);
-
-
-
 
   useEffect(() => {
     if (!search) return setSearchResults([]);
@@ -145,18 +140,14 @@ function Dashboard({ code }) {
     return () => (cancel = true);
   }, [search, accessToken]);
 
- 
-
+  // Fetch current track position every 1sec
   useEffect(() => {
     const interval = setInterval(() => {
-      updateRealtime(time, progression);
-      console.dir(" ");
+      fetchTrackPosition();
     }, 1000);
 
     return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
   }, []);
-
-
 
   useEffect(() => {
     let interval = null;
@@ -165,7 +156,6 @@ function Dashboard({ code }) {
       interval = setInterval(() => {
         setTime((time) => time + 100);
       }, 100);
-     
     } else {
       clearInterval(interval);
     }
@@ -174,18 +164,21 @@ function Dashboard({ code }) {
     };
   }, [isActive, isPaused, time]);
 
- 
-
   return (
     <div className="dashboard-container">
       <div className="debugThing">
-      <p className="debug">{progression}</p>
-      <p className="debug">{realProgression}</p>
-      <p className="debug">{time}</p>
-      <p className="debug">{deviceID}</p>
-      <button className="debug" onClick={event => updateRealtime(time, progression)}>
-        Update
-      </button>
+        {/*         <p className="debug">{progression}</p>
+         */}{" "}
+        <p className="debug">{realProgression}</p>
+        {/*   <p className="debug">{time}</p>
+        <p className="debug">{deviceID}</p> */}
+        <button
+          className="debug"
+          onClick={(event) =>console.dir(sections)}
+        >
+          section
+        </button>
+        {/*  <button onClick={fetchTrackPosition}>Get Time</button> */}
       </div>
       <form className="dashboard-search-container">
         <input
@@ -213,8 +206,11 @@ function Dashboard({ code }) {
       </div>
       <div className="dashboard-segements-container">
         {sections.map((section, index) => {
-          const color = index % 2 == 0 ? "#252525" : "#dedede";
-          const procentWidth = (section / duration) * 100;
+          let color = index % 2 == 0 ? "#252525" : "#dedede";
+          const procentWidth = (section.duration / duration) * 100;
+          if(section.start < realProgression){
+            color= "green";
+          }
           const segmentStyle = {
             width: procentWidth + "%",
             backgroundColor: color,
