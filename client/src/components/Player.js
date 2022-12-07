@@ -10,7 +10,8 @@ function Player({
   
   handleStart,
   handlePauseResume,
-  handleReset
+  handleReset,
+  handleDeviceId
 
 }) {
   const [play, setPlay] = useState(false);
@@ -30,6 +31,7 @@ function Player({
         play={play}
         initialVolume={1}
         name={"Vibify Animator"}
+        magnifySliderOnHover={true}
         styles={{
           activeColor: "#1A1A1A",
           bgColor: "#212121 ",
@@ -53,8 +55,9 @@ function Player({
            
            
           }
+          
        
-         
+          handleDeviceId(state.currentDeviceId)
           progressionCallback(state.progressMs);
          
         }}

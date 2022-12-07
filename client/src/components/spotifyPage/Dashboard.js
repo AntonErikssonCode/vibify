@@ -30,6 +30,11 @@ function Dashboard({ code }) {
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
   const [time, setTime] = useState(0);
+  const [deviceID, setDeviceID] = useState(0);
+  
+  function handleDeviceId(deviceID) {
+    setDeviceID(deviceID);
+  }
 
   function chooseTrack(track) {
     spotifyApi.getAudioFeaturesForTrack(track.id).then(function (data) {
@@ -92,6 +97,16 @@ function Dashboard({ code }) {
     setRealProgression( newTime + newProgression);
   };
 
+
+  async function getDevices(){
+    // 	https://api.spotify.com/v1/me/player/devices
+
+    fetch('http://example.com/movies.json')
+  .then((response) => response.json())
+  .then((data) => console.log(data));
+
+
+  }
 
   useEffect(() => {
     if (!accessToken) return;
@@ -167,6 +182,7 @@ function Dashboard({ code }) {
       <p className="debug">{progression}</p>
       <p className="debug">{realProgression}</p>
       <p className="debug">{time}</p>
+      <p className="debug">{deviceID}</p>
       <button className="debug" onClick={event => updateRealtime(time, progression)}>
         Update
       </button>
@@ -245,6 +261,7 @@ function Dashboard({ code }) {
           handleStart={handleStart}
           handlePauseResume={handlePauseResume}
           handleReset={handleReset}
+          handleDeviceId={handleDeviceId}
         />
       </div>
     </div>
