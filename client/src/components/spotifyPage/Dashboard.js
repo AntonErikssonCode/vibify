@@ -13,18 +13,24 @@ const spotifyApi = new SpotifyWebApi({
 
 function Dashboard({ code }) {
   const accessToken = useAuth(code);
+
+
+
   const [search, setSearch] = useState("aretha frankli");
   const [searchResults, setSearchResults] = useState([]);
   const [playingTrack, setPlayingTrack] = useState();
   const [canvas, setCanvas] = useState(false);
-
   const [duration, setDuration] = useState(0);
   const [sections, setSections] = useState([]);
   const [bars, setBars] = useState([]);
   const [startAt, setStartAt] = useState();
-
   const [progression, setProgression] = useState(0);
   const [realProgression, setRealProgression] = useState(0);
+  const [updateTime, setUpdateTime] = useState(performance.now());
+  const [isActive, setIsActive] = useState(false);
+  const [isPaused, setIsPaused] = useState(true);
+  const [time, setTime] = useState(0);
+
   function chooseTrack(track) {
     spotifyApi.getAudioFeaturesForTrack(track.id).then(function (data) {
       track.features = data.body;
@@ -52,10 +58,48 @@ function Dashboard({ code }) {
     });
   }
 
+  // Progression
+  function handleProgression(progression) {
+    setProgression(progression);
+  }
+
+  // Progression
+  function handleRealProgression(realProgression) {
+    setRealProgression(realProgression);
+  }
+
+  const handleStart = () => {
+    console.dir("start");
+    setIsActive(true);
+    setIsPaused(false);
+  };
+
+  const handlePauseResume = () => {
+    console.dir("resume");
+    setIsPaused(!isPaused);
+  };
+
+  const handleReset = () => {
+    console.dir("reset");
+    setIsActive(false);
+    setTime(0);
+  };
+
+  const updateRealtime = (newTime, newProgression) => {
+    console.dir("Time = " + newTime);
+    console.dir("Progression = " + newProgression);
+    console.dir("Time + Progression = " + newTime + newProgression);
+    setRealProgression( newTime + newProgression);
+  };
+
+
   useEffect(() => {
     if (!accessToken) return;
     spotifyApi.setAccessToken(accessToken);
   }, [accessToken]);
+
+
+
 
   useEffect(() => {
     if (!search) return setSearchResults([]);
@@ -86,30 +130,18 @@ function Dashboard({ code }) {
     return () => (cancel = true);
   }, [search, accessToken]);
 
-  // Progression
-  function handleProgression(progression) {
-    setProgression(progression);
-  }
+ 
 
-  // Progression
-  function handleRealProgression(realProgression) {
-    setRealProgression(realProgression);
-  }
-
-  const [updateTime, setUpdateTime] = useState(performance.now());
-
-/*   useEffect(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       updateRealtime(time, progression);
       console.dir(" ");
     }, 1000);
 
     return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
-  }, []); */
+  }, []);
 
-  const [isActive, setIsActive] = useState(false);
-  const [isPaused, setIsPaused] = useState(true);
-  const [time, setTime] = useState(0);
+
 
   useEffect(() => {
     let interval = null;
@@ -127,29 +159,7 @@ function Dashboard({ code }) {
     };
   }, [isActive, isPaused, time]);
 
-  const handleStart = () => {
-    console.dir("start");
-    setIsActive(true);
-    setIsPaused(false);
-  };
-
-  const handlePauseResume = () => {
-    console.dir("resume");
-    setIsPaused(!isPaused);
-  };
-
-  const handleReset = () => {
-    console.dir("reset");
-    setIsActive(false);
-    setTime(0);
-  };
-
-  const updateRealtime = (newTime, newProgression) => {
-    console.dir("Time = " + newTime);
-    console.dir("Progression = " + newProgression);
-    console.dir("Time + Progression = " + newTime + newProgression);
-    setRealProgression( newTime + newProgression);
-  };
+ 
 
   return (
     <div className="dashboard-container">
