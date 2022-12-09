@@ -9,20 +9,7 @@ function MediaStream(props) {
   const [loudness, setLoudness] = useState(0);
   const [renderCounter, setRenderCounter] = useState(0);
   const baseColor = Color.rgb(64, 128, 200);
-  /*   useEffect(()=>{
-    navigator.mediaDevices
-    .getUserMedia({
-      audio: false,
-      video: true,
-    })
-    .then((stream) => {
-      streamRef.current.srcObject = stream;
-      console.dir("stream")
-    })
-    .catch(console.error);
 
-  }, [])
-  */
   useEffect(() => {
     navigator.getUserMedia(
       { audio: true },
@@ -44,10 +31,8 @@ function MediaStream(props) {
 
             callback: (features) => {
               console.log(features.loudness.total);
-              setLoudness(features.loudness.total)
-              setRenderCounter(
-                (prevActiveStep) => prevActiveStep + 0.01
-              );
+              setLoudness(features.loudness.total);
+              setRenderCounter((prevActiveStep) => prevActiveStep + 0.01);
             },
           });
           analyzer.start();
@@ -60,18 +45,15 @@ function MediaStream(props) {
   return (
     <div className="coverScreen">
       <Canvas>
-          <ambientLight intensity={0.1} />
-          <spotLight position={[0, 10, 10]} angle={0.15} penumbra={1} />
-          <pointLight position={[-10, -10, -10]} />
-          <ResponsiveShape
-            loudness={loudness}
-            meshColor={baseColor}
-            renderCounter={0}
-          />
-
-        
-</Canvas>
-          
+        <ambientLight intensity={0.1} />
+        <spotLight position={[0, 10, 10]} angle={0.15} penumbra={1} />
+        <pointLight position={[-10, -10, -10]} />
+        <ResponsiveShape
+          loudness={loudness}
+          meshColor={baseColor}
+          renderCounter={0}
+        />
+      </Canvas>
     </div>
   );
 }

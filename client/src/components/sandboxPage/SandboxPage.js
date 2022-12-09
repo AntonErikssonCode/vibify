@@ -15,16 +15,12 @@ function SandboxPage(props) {
   const { color } = useControls("canvas", { color: "black" });
   return (
     <div className="SandboxPage-canvas">
-      {/* <canvas className="SandboxPage-background" id="mycanvas">
-        {" "}
-      </canvas> */}
-<Background/>
-      <Canvas /*  style={{ background: color }} */>
+      <Background />
+      <Canvas>
         <ambientLight intensity={0.1} />
         <spotLight position={[50, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -10, -10]} />
         <SandboxShape />
-     {/*    <Noiseee/> */}
       </Canvas>
     </div>
   );

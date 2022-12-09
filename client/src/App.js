@@ -1,5 +1,5 @@
 import IntroPage from "./components/introPage/IntroPage";
-import Router from "./components/Router";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UploadPage from "./components/uploadPage/UploadPage";
 import SandboxPage from "./components/sandboxPage/SandboxPage";
@@ -19,16 +19,7 @@ function App() {
         <Route path="demo" exact element={<DemoPage />} />
       </Routes>
     </BrowserRouter>
-
   );
-    
-  
-  /*   return code ? (
-    <Dashboard code={code} />
-  ) : (
-    <IntroPage/>
-
-  ); */
 }
 
 export default App;

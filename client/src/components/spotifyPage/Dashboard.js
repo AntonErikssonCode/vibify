@@ -5,7 +5,7 @@ import TrackSearchResults from "./TrackSearchResults";
 import Player from "../Player";
 import "./Dashboard.css";
 import OutputCanvas from "../3DComponents/OutputCanvas";
-import WebPlayback from "../SpotifyPlayer";
+
 
 const spotifyApi = new SpotifyWebApi({
   clientId: process.env.REACT_APP_CLIENT_KEY,
@@ -20,20 +20,9 @@ function Dashboard({ code }) {
   const [canvas, setCanvas] = useState(false);
   const [duration, setDuration] = useState(0);
   const [sections, setSections] = useState([]);
-  const [reachedSections, setReachedSections] = useState([]);
   const [bars, setBars] = useState([]);
   const [startAt, setStartAt] = useState();
-  const [progression, setProgression] = useState(0);
   const [realProgression, setRealProgression] = useState(0);
-  const [updateTime, setUpdateTime] = useState(performance.now());
-  const [isActive, setIsActive] = useState(false);
-  const [isPaused, setIsPaused] = useState(true);
-  const [time, setTime] = useState(0);
-  const [deviceID, setDeviceID] = useState(0);
-
-  function handleDeviceId(deviceID) {
-    setDeviceID(deviceID);
-  }
 
   function chooseTrack(track) {
     spotifyApi.getAudioFeaturesForTrack(track.id).then(function (data) {
@@ -60,51 +49,13 @@ function Dashboard({ code }) {
     });
   }
 
-  // Progression
-  function handleProgression(progression) {
-    setProgression(progression);
-  }
-
-  // Progression
-  function handleRealProgression(realProgression) {
-    setRealProgression(realProgression);
-  }
-
-  const handleStart = () => {
-    console.dir("start");
-    setIsActive(true);
-    setIsPaused(false);
-  };
-
-  const handlePauseResume = () => {
-    console.dir("resume");
-    setIsPaused(!isPaused);
-  };
-
-  const handleReset = () => {
-    console.dir("reset");
-    setIsActive(false);
-    setTime(0);
-  };
-
-  const updateRealtime = (newTime, newProgression) => {
-    console.dir("Time = " + newTime);
-    console.dir("Progression = " + newProgression);
-    console.dir("Time + Progression = " + newTime + newProgression);
-    setRealProgression(newTime + newProgression);
-  };
-
   async function fetchTrackPosition() {
     spotifyApi.getMyCurrentPlaybackState().then((res) => {
       if (res.body === null) return;
       console.dir(res.body.progress_ms);
-      setRealProgression(res.body.progress_ms/1000);
+      setRealProgression(res.body.progress_ms / 1000);
     });
-   
   }
-
-
-  
 
   useEffect(() => {
     if (!accessToken) return;
@@ -149,36 +100,13 @@ function Dashboard({ code }) {
     return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
   }, []);
 
-  useEffect(() => {
-    let interval = null;
-
-    if (isActive && isPaused === false) {
-      interval = setInterval(() => {
-        setTime((time) => time + 100);
-      }, 100);
-    } else {
-      clearInterval(interval);
-    }
-    return () => {
-      clearInterval(interval);
-    };
-  }, [isActive, isPaused, time]);
-
   return (
     <div className="dashboard-container">
       <div className="debugThing">
-        {/*         <p className="debug">{progression}</p>
-         */}{" "}
         <p className="debug">{realProgression}</p>
-        {/*   <p className="debug">{time}</p>
-        <p className="debug">{deviceID}</p> */}
-        <button
-          className="debug"
-          onClick={(event) =>console.dir(sections)}
-        >
+        <button className="debug" onClick={(event) => console.dir(sections)}>
           section
         </button>
-        {/*  <button onClick={fetchTrackPosition}>Get Time</button> */}
       </div>
       <form className="dashboard-search-container">
         <input
@@ -208,8 +136,8 @@ function Dashboard({ code }) {
         {sections.map((section, index) => {
           let color = index % 2 == 0 ? "#252525" : "#dedede";
           const procentWidth = (section.duration / duration) * 100;
-          if(section.start < realProgression){
-            color= "green";
+          if (section.start < realProgression) {
+            color = "green";
           }
           const segmentStyle = {
             width: procentWidth + "%",
@@ -253,11 +181,6 @@ function Dashboard({ code }) {
           accessToken={accessToken}
           trackUri={playingTrack?.uri}
           track={playingTrack}
-          progressionCallback={handleProgression}
-          handleStart={handleStart}
-          handlePauseResume={handlePauseResume}
-          handleReset={handleReset}
-          handleDeviceId={handleDeviceId}
         />
       </div>
     </div>
