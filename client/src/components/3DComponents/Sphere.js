@@ -10,8 +10,8 @@ function Sphere(props) {
   const [hovered, hover] = useState(false);
   const [clicked, click] = useState(false);
   // Subscribe this component to the render-loop, rotate the mesh every frame
-  useFrame((state, delta) => (ref.current.rotation.x += 0.01));
-  useFrame((state, delta) => (ref.current.position.z = 0.01));
+/*   useFrame((state, delta) => (ref.current.rotation.x += 0.01));
+  useFrame((state, delta) => (ref.current.position.z = 0.01)); */
   // Return the view, these are regular Threejs elements expressed in JSX
   return (
     <mesh

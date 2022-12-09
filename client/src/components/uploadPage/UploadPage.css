@@ -1,7 +1,22 @@
 .UploadPage-container{
+  padding: 2rem;
  
 }
 
 .coverScreen{
   z-index: -10;
+}
+
+.chromaKeys{
+ padding-right: 0.5rem;
+ width: 100%/12;
+}
+
+.chromaDiv{
+ 
+  display: flex;
+  justify-content: space-evenly;
+  width: 20%;
+ 
+ 
 }
