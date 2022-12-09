@@ -141,52 +141,6 @@ function Dashboard({ code }) {
           {canvas ? <OutputCanvas track={playingTrack} /> : null}
         </div>
       </div>
-
-      <div className="dashboard-segements-container">
-        {sections.map((section, index) => {
-          let color = index % 2 == 0 ? "#252525" : "#dedede";
-          const procentWidth = (section.duration / duration) * 100;
-          if (section.start < progression) {
-            color = "green";
-          }
-          const segmentStyle = {
-            width: procentWidth + "%",
-            backgroundColor: color,
-          };
-          return (
-            <div
-              key={"segment" + index}
-              className="dashboard-segment"
-              style={segmentStyle}
-            ></div>
-          );
-        })}
-      </div>
-
-      {/* <div className="dashboard-bars-container">
-        <div
-          className="dashboard-bars white-bar"
-          style={{ width: (startAt / duration) * 100 + "%" }}
-        ></div>
-        {bars.map((bar, index) => {
-          const color = index % 2 == 0 ? "#252525" : "#dedede";
-          const procentWidth = (bar / duration) * 100;
-          const barStyle = {
-            width: procentWidth + "%",
-            backgroundColor: color,
-          };
-
-          return (
-            <div
-              key={"segment" + index}
-              className="dashboard-bars"
-              style={barStyle}
-            ></div>
-          );
-        })}
-
-        <div className="dashboard-bars white-bar" style={{ flex: 1 }}></div>
-      </div> */}
       <div className="dashboard-player-container">
         <Player
           accessToken={accessToken}
