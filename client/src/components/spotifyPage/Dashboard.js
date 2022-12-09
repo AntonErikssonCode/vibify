@@ -6,7 +6,6 @@ import Player from "../Player";
 import "./Dashboard.css";
 import OutputCanvas from "../3DComponents/OutputCanvas";
 
-
 const spotifyApi = new SpotifyWebApi({
   clientId: process.env.REACT_APP_CLIENT_KEY,
 });
@@ -21,8 +20,8 @@ function Dashboard({ code }) {
   const [duration, setDuration] = useState(0);
   const [sections, setSections] = useState([]);
   const [bars, setBars] = useState([]);
-  const [startAt, setStartAt] = useState();
-  const [realProgression, setRealProgression] = useState(0);
+  const [progression, setProgression] = useState(0);
+  const [currentSection, setCurrentSection] = useState(0);
 
   function chooseTrack(track) {
     spotifyApi.getAudioFeaturesForTrack(track.id).then(function (data) {
@@ -32,7 +31,7 @@ function Dashboard({ code }) {
         setPlayingTrack(track);
         console.dir(track);
         setCanvas(true);
-        setStartAt(track.audio.bars[0].start);
+
         setSections(
           track.audio.sections.map((section) => {
             return section;
@@ -52,8 +51,7 @@ function Dashboard({ code }) {
   async function fetchTrackPosition() {
     spotifyApi.getMyCurrentPlaybackState().then((res) => {
       if (res.body === null) return;
-      console.dir(res.body.progress_ms);
-      setRealProgression(res.body.progress_ms / 1000);
+      setProgression(res.body.progress_ms / 1000);
     });
   }
 
@@ -100,13 +98,24 @@ function Dashboard({ code }) {
     return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
   }, []);
 
+  useEffect(() => {
+    let lastPassedSection;
+   sections.forEach((section, index)=>{
+    if (section.start < progression) {
+      lastPassedSection = index;
+      
+    }
+    
+   })
+   setCurrentSection(lastPassedSection);
+
+  }, [progression]);
+
   return (
     <div className="dashboard-container">
       <div className="debugThing">
-        <p className="debug">{realProgression}</p>
-        <button className="debug" onClick={(event) => console.dir(sections)}>
-          section
-        </button>
+        <p className="debug">Elapsed Time: {progression}</p>
+        <p className="debug">Current Section: {currentSection}</p>
       </div>
       <form className="dashboard-search-container">
         <input
@@ -132,11 +141,12 @@ function Dashboard({ code }) {
           {canvas ? <OutputCanvas track={playingTrack} /> : null}
         </div>
       </div>
+
       <div className="dashboard-segements-container">
         {sections.map((section, index) => {
           let color = index % 2 == 0 ? "#252525" : "#dedede";
           const procentWidth = (section.duration / duration) * 100;
-          if (section.start < realProgression) {
+          if (section.start < progression) {
             color = "green";
           }
           const segmentStyle = {
@@ -152,7 +162,8 @@ function Dashboard({ code }) {
           );
         })}
       </div>
-      <div className="dashboard-bars-container">
+
+      {/* <div className="dashboard-bars-container">
         <div
           className="dashboard-bars white-bar"
           style={{ width: (startAt / duration) * 100 + "%" }}
@@ -175,7 +186,7 @@ function Dashboard({ code }) {
         })}
 
         <div className="dashboard-bars white-bar" style={{ flex: 1 }}></div>
-      </div>
+      </div> */}
       <div className="dashboard-player-container">
         <Player
           accessToken={accessToken}

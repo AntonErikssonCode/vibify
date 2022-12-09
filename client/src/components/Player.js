@@ -2,30 +2,14 @@ import React, { useEffect, useState } from "react";
 import SpotifyPlayer from "react-spotify-web-playback";
 import { start } from "tone";
 
-function Player({
-  accessToken,
-  trackUri,
-  track,
-  progressionCallback,
-  
-  handleStart,
-  handlePauseResume,
-  handleReset,
-  handleDeviceId
-
-}) {
+function Player({ accessToken, trackUri }) {
   const [play, setPlay] = useState(false);
 
-
   useEffect(() => setPlay(true), [trackUri]);
-
-
-
 
   if (!accessToken) return null;
   return (
     <div>
-      
       <SpotifyPlayer
         token={accessToken}
         play={play}
@@ -43,23 +27,11 @@ function Player({
         }}
         callback={(state) => {
           if (!state.isPlaying) setPlay(false);
-          if(state.isPlaying){
-            console.dir("state is playing")
-            handleStart();
-          
-          
+          if (state.isPlaying) {
+            console.dir("state is playing");
+          } else {
+            console.dir("state is  NOT playing");
           }
-          else{
-            console.dir("state is  NOT playing")
-            handleReset();
-           
-           
-          }
-          
-       
-          handleDeviceId(state.currentDeviceId)
-          progressionCallback(state.progressMs);
-         
         }}
         uris={trackUri ? [trackUri] : []}
       />
