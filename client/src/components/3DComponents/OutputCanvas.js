@@ -12,7 +12,7 @@ export default function OutputCanvas(props) {
       <spotLight position={[50, 10, 10]} angle={0.15} penumbra={1} />
       <pointLight position={[-10, -10, -10]} />
      
-      <Sphere position={[0, 0, 0]} track={track}/>
+      <Sphere position={[0, 0, 0]} track={track} moveDirection={props.moveDirection}/>
     </Canvas>
   )
 }

@@ -6,6 +6,7 @@ import Player from "../Player";
 import "./Dashboard.css";
 import OutputCanvas from "../3DComponents/OutputCanvas";
 
+// Used for fetching data
 const spotifyApi = new SpotifyWebApi({
   clientId: process.env.REACT_APP_CLIENT_KEY,
 });
@@ -43,10 +44,31 @@ function Dashboard({ code }) {
             return bar.duration;
           })
         );
+
         setDuration(track.audio.track.duration);
       });
     });
   }
+
+  function getTempo(){
+    console.dir(60/playingTrack.features.tempo)
+
+  }
+  const [moveDirection, setMoveDirection] = useState("right");
+
+  useEffect(() => {
+    let num = 0;
+    if(playingTrack){
+    const interval = setInterval(() => {
+      num++;
+      setMoveDirection(num)
+      
+      
+     
+    }, 60/playingTrack.features.tempo*1000);
+
+    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+  }}, [playingTrack]);
 
   async function fetchTrackPosition() {
     spotifyApi.getMyCurrentPlaybackState().then((res) => {
@@ -116,6 +138,7 @@ function Dashboard({ code }) {
       <div className="debugThing">
         <p className="debug">Elapsed Time: {progression}</p>
         <p className="debug">Current Section: {currentSection}</p>
+        <button onClick={getTempo}>dasd</button>
       </div>
       <form className="dashboard-search-container">
         <input
@@ -138,7 +161,7 @@ function Dashboard({ code }) {
             : null}
         </div>
         <div className="dashboard-canvas">
-          {canvas ? <OutputCanvas track={playingTrack} /> : null}
+          {canvas ? <OutputCanvas track={playingTrack} moveDirection={moveDirection}/> : null}
         </div>
       </div>
       <div className="dashboard-player-container">
