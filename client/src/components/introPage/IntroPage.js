@@ -10,7 +10,7 @@ import Upload from "./Upload";
 function IntroPage() {
   return (
     <div className="IntroPage-container">
-      <h1 className="IntroPage-titel"> Vibify Animator</h1>
+      <h1 className="IntroPage-titel"> Vibify</h1>
       <h2 className="IntroPage-subtitle"> Created By Anton Eriksson</h2>
       <div className="IntroPage-menu">
         <Login />

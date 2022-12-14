@@ -16,12 +16,12 @@ function Sphere(props) {
 
   useFrame((state, delta) => {
     if(props.moveDirection% 2 == 0){
-      setSize((prev) => size +0.02)
+      setSize((prev) => size +0.01)
     
     }
 
     else{
-      setSize((prev) => size -0.02)
+      setSize((prev) => size -0.01)
     }
 
   });

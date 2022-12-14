@@ -1,37 +1,36 @@
-.IntroPage-container{
+.IntroPage-container {
   width: 100vw;
   height: 100vh;
-  background-image: linear-gradient(
+ /*  background-image: linear-gradient(
     50deg,
     hsl(0deg 0% 0%) 0%,
-    
+
     #7802fe 100%
-  );display: flex;
+  ); */
+  background-color: rgb(31, 31, 31);
+  display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   color: rgb(255, 255, 255);
 }
 
-.IntroPage-titel{
+.IntroPage-titel {
   font-size: 6rem;
   margin: 0;
-
 }
 
-.IntroPage-subtitle{
+.IntroPage-subtitle {
   font-size: 2rem;
   margin: 0;
   font-weight: 100;
-
 }
 
-.IntroPage-menu{
+.IntroPage-menu {
   display: flex;
-  gap: 6rem;
+  gap: 2rem;
   padding: 4rem;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-
 }

@@ -14,7 +14,7 @@ const spotifyApi = new SpotifyWebApi({
 function Dashboard({ code }) {
   const accessToken = useAuth(code);
 
-  const [search, setSearch] = useState("aretha frankli");
+  const [search, setSearch] = useState("Aretha Franklin");
   const [searchResults, setSearchResults] = useState([]);
   const [playingTrack, setPlayingTrack] = useState();
   const [canvas, setCanvas] = useState(false);
