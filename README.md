@@ -1,5 +1,5 @@
 # Vibify 
-Vibify is a React research project with the goal of visualizing audio in 3D. Several approaches are being investigated such as real time audio extraction from your raw audio as well as the implementation of the Spotify API and SDK. 
+Vibify is a React research project with the goal of visualizing audio in 3D. Several approaches are being investigated such as real time audio extraction your raw audio as well as the implementation of the Spotify API and SDK. 
 
 ## Features
 
