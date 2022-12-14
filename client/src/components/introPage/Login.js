@@ -11,7 +11,7 @@ const AUTH_URL =
 
 
 function Login() {
-  
+ 
   return (
     <div className="MenuItem-container">
     <h2 className="MenuItem-title">Use Spotify Audio And Features</h2>

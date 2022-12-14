@@ -5,6 +5,7 @@ import UploadPage from "./components/uploadPage/UploadPage";
 import SandboxPage from "./components/sandboxPage/SandboxPage";
 import Dashboard from "./components/spotifyPage/Dashboard";
 import MicInput from "./components/micInput/MicInputPage";
+import SoundcloudPage from "./components/soundcloudPage/SoundcloudPage";
 
 const code = new URLSearchParams(window.location.search).get("code");
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="upload" exact element={<UploadPage />} />
         <Route path="sandbox" exact element={<SandboxPage />} />
         <Route path="mic" exact element={<MicInput />} />
+        <Route path="soundcloud" exact element={<SoundcloudPage />} />
       </Routes>
     </BrowserRouter>
   );

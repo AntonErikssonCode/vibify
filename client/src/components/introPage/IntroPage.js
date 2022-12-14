@@ -4,7 +4,7 @@ import "./IntroPage.css";
 import Sandbox from "./Sandbox";
 import MicInput from "./MicInput"
 import Upload from "./Upload";
-/* import dotenv from "dotenv" */
+import Soundcloud from "./Soundcloud";
 
 
 
@@ -19,6 +19,7 @@ function IntroPage() {
         <Upload/>
         <MicInput/>
         <Sandbox/>
+        <Soundcloud/>
       </div>
     </div>
    
