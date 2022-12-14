@@ -4,10 +4,12 @@ import "./IntroPage.css";
 import Sandbox from "./Sandbox";
 import MicInput from "./MicInput"
 import Upload from "./Upload";
+/* import dotenv from "dotenv" */
 
 
 
 function IntroPage() {
+ 
   return (
     <div className="IntroPage-container">
       <h1 className="IntroPage-titel"> Vibify</h1>
