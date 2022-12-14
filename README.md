@@ -13,7 +13,7 @@ Vibify requires [Node.js](https://nodejs.org/) to run.
 
 Clone the repository. 
 
-If you want to use the Spotify functionality you need to [Create a Spotify App ](https://developer.spotify.com/dashboard/login) to get access to you client and secret key. Create a .env file in the root folder with the following variables:
+If you want to use the Spotify functionality you need to [Create a Spotify App ](https://developer.spotify.com/dashboard/login) to get access to you client and secret key. Create a .env file in the server folder with the following variables:
 
 ```sh
 CLIENT_KEY = <"YOUR CLIENT KEY">
