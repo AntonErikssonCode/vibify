@@ -149,7 +149,7 @@ function Dashboard({ code }) {
 
           </div>
         ) : (
-          "not"
+          " "
         )}
       </div>
       <form className="dashboard-search-container">

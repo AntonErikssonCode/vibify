@@ -5,6 +5,10 @@ font-size: 1.6rem;
 gap: 1rem;
 cursor: pointer;
 
+
+}
+.trackSearchResults-container:hover{
+  background-color: rgb(19, 19, 19);
 }
 .trackSearchResults-title{
   font-size: 1.4rem;
