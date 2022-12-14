@@ -1,11 +1,12 @@
 # Vibify 
-Vibify is a React research project with the goal of visualizing sound in 3D. Several approaches are being investigated such as real time audio extraction from your own uploaded audio as well as the implementation of the Spotify API and SDK. 
+Vibify is a React research project with the goal of visualizing audio in 3D. Several approaches are being investigated such as real time audio extraction from your raw audio as well as the implementation of the Spotify API and SDK. 
 
 ## Features
 
-- Spotify Authentication, Song Search, Playback And Feature Mapping
-- Demo Song and Real Time Audio Feature extraction using [Meyda](https://meyda.js.org/)
-- Basic Manipulatable React 3D-components
+- Spotify Authentication, Song Search, Playback And Api feature extraction.
+- Demo song and Real Time audio feature extraction using [Meyda](https://meyda.js.org/).
+- [Meyda](https://meyda.js.org/) feature extraction on microphone input. 
+- Basic manipulatable React 3D-components.
 
 ## Installation
 
@@ -26,7 +27,7 @@ SECRET_KEY = <"YOUR SECRET CLIENT KEY">
 cd client
 npm install
 ```
-...and the backend. Note that the backend is only used for Spotify API authorization. 
+...and the backend. Note that the backend is only used for Spotify API/SDK authorization. 
 ```sh
 cd server
 npm install
