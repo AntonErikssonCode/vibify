@@ -30,6 +30,7 @@ function Dashboard({ code }) {
       spotifyApi.getAudioAnalysisForTrack(track.id).then(function (data) {
         track.audio = data.body;
         setPlayingTrack(track);
+
         console.dir(track);
         setCanvas(true);
 
@@ -50,25 +51,22 @@ function Dashboard({ code }) {
     });
   }
 
-  function getTempo(){
-    console.dir(60/playingTrack.features.tempo)
-
+  function getTempo() {
+    console.dir(60 / playingTrack.features.tempo);
   }
   const [moveDirection, setMoveDirection] = useState("right");
 
   useEffect(() => {
     let num = 0;
-    if(playingTrack){
-    const interval = setInterval(() => {
-      num++;
-      setMoveDirection(num)
-      
-      
-     
-    }, 60/playingTrack.features.tempo*1000);
+    if (playingTrack) {
+      const interval = setInterval(() => {
+        num++;
+        setMoveDirection(num);
+      }, (60 / playingTrack.features.tempo) * 1000);
 
-    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
-  }}, [playingTrack]);
+      return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+    }
+  }, [playingTrack]);
 
   async function fetchTrackPosition() {
     spotifyApi.getMyCurrentPlaybackState().then((res) => {
@@ -122,15 +120,12 @@ function Dashboard({ code }) {
 
   useEffect(() => {
     let lastPassedSection;
-   sections.forEach((section, index)=>{
-    if (section.start < progression) {
-      lastPassedSection = index;
-      
-    }
-    
-   })
-   setCurrentSection(lastPassedSection);
-
+    sections.forEach((section, index) => {
+      if (section.start < progression) {
+        lastPassedSection = index;
+      }
+    });
+    setCurrentSection(lastPassedSection);
   }, [progression]);
 
   return (
@@ -138,7 +133,24 @@ function Dashboard({ code }) {
       <div className="debugThing">
         <p className="debug">Elapsed Time: {progression}</p>
         <p className="debug">Current Section: {currentSection}</p>
-        <button onClick={getTempo}>dasd</button>
+        {playingTrack ? (
+          <div>
+            <p>Acousticness: {playingTrack.features.acousticness}</p>
+            <p>Danceability: {playingTrack.features.danceability}</p>
+            <p>Energy: {playingTrack.features.energy}</p>
+            <p>Instrumentalness: {playingTrack.features.instrumentalness}</p>
+            <p>Liveness: {playingTrack.features.liveness}</p>
+            <p>Loudness: {playingTrack.features.loudness}</p>
+            <p>Valence: {playingTrack.features.danceability}</p>
+            <p>Danceability: {playingTrack.features.danceability}</p>
+            <p>Tempo: {playingTrack.features.tempo}</p>
+            <p>Mode: {playingTrack.features.mode}</p>
+            <p>Key: {playingTrack.features.key}</p>
+
+          </div>
+        ) : (
+          "not"
+        )}
       </div>
       <form className="dashboard-search-container">
         <input
@@ -161,7 +173,9 @@ function Dashboard({ code }) {
             : null}
         </div>
         <div className="dashboard-canvas">
-          {canvas ? <OutputCanvas track={playingTrack} moveDirection={moveDirection}/> : null}
+          {canvas ? (
+            <OutputCanvas track={playingTrack} moveDirection={moveDirection} />
+          ) : null}
         </div>
       </div>
       <div className="dashboard-player-container">
