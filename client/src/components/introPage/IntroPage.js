@@ -2,7 +2,7 @@ import React from "react";
 import Login from "./Login";
 import "./IntroPage.css";
 import Sandbox from "./Sandbox";
-import Demo from "./Demo";
+import MicInput from "./MicInput"
 import Upload from "./Upload";
 
 
@@ -15,7 +15,7 @@ function IntroPage() {
       <div className="IntroPage-menu">
         <Login />
         <Upload/>
-        <Demo/>
+        <MicInput/>
         <Sandbox/>
       </div>
     </div>

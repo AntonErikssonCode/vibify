@@ -9,7 +9,8 @@ function MediaStream(props) {
   const [loudness, setLoudness] = useState(0);
   const [renderCounter, setRenderCounter] = useState(0);
   const baseColor = Color.rgb(64, 128, 200);
-
+  var MediaStream;
+  
   useEffect(() => {
     navigator.getUserMedia(
       { audio: true },
@@ -17,6 +18,8 @@ function MediaStream(props) {
         // create the MediaStreamAudioSourceNode
         var context = new AudioContext();
         var source = context.createMediaStreamSource(stream);
+        MediaStream = stream.getTracks()[0];
+
         source.connect(context.destination);
 
         if (typeof Meyda === "undefined") {
@@ -30,7 +33,7 @@ function MediaStream(props) {
             featureExtractors: ["loudness"],
 
             callback: (features) => {
-              console.log(features.loudness.total);
+              /* console.log(features.loudness.total); */
               setLoudness(features.loudness.total);
               setRenderCounter((prevActiveStep) => prevActiveStep + 0.01);
             },
@@ -40,6 +43,10 @@ function MediaStream(props) {
       },
       function (e) {}
     );
+    return () => {
+      console.dir("Stop Media Stream");
+      MediaStream.stop();
+    };
   }, []);
 
   return (

@@ -9,8 +9,8 @@ const AUTH_URL =
 function Login() {
   return (
     <div className="MenuItem-container">
-    <h2 className="MenuItem-title">Login With Spotify</h2>
-    <a className="MenuItem-button" href={AUTH_URL}> LOGIN</a>
+    <h2 className="MenuItem-title">Use Spotify Audio And Features</h2>
+    <a className="MenuItem-button" href={AUTH_URL}> Spotify Audio</a>
   </div>
   );
 }

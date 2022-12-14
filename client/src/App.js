@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UploadPage from "./components/uploadPage/UploadPage";
 import SandboxPage from "./components/sandboxPage/SandboxPage";
 import Dashboard from "./components/spotifyPage/Dashboard";
-import DemoPage from "./components/demoPage/DemoPage";
+import MicInput from "./components/micInput/MicInputPage";
 
 const code = new URLSearchParams(window.location.search).get("code");
 function App() {
@@ -16,7 +16,7 @@ function App() {
         <Route path="/" exact element={<IntroPage />} />
         <Route path="upload" exact element={<UploadPage />} />
         <Route path="sandbox" exact element={<SandboxPage />} />
-        <Route path="demo" exact element={<DemoPage />} />
+        <Route path="mic" exact element={<MicInput />} />
       </Routes>
     </BrowserRouter>
   );
