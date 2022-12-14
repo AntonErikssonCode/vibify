@@ -19,7 +19,7 @@ function IntroPage() {
         <Upload/>
         <MicInput/>
         <Sandbox/>
-        <Soundcloud/>
+    {/*     <Soundcloud/> */}
       </div>
     </div>
    

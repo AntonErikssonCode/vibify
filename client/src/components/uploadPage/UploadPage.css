@@ -1,10 +1,12 @@
 .UploadPage-container{
   padding: 2rem;
+  
  
 }
 
 .coverScreen{
   z-index: -10;
+ 
 }
 
 .chromaKeys{
@@ -19,4 +21,8 @@
   width: 20%;
  
  
+}
+.beatDiv{
+  width: 100px;
+  height: 100px;
 }

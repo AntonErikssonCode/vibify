@@ -7,6 +7,7 @@ import ResponsiveShape from "../3DComponents/ResponsiveShape";
 import Color from "color";
 import CircleShape from "../3DComponents/CircleShape";
 import Test from "../3DComponents/Test";
+import { context } from "tone";
 
 function UploadPage(props) {
   const uploadRef = useRef(null);
@@ -37,7 +38,7 @@ function UploadPage(props) {
   const [renderCounter, setRenderCounter] = useState(0);
 
   const [audio, setAudio] = useState(demoTune);
-
+  const [beat, setBeat] = useState(false);
   const keys = ["C", "C♯", "D", "D♯", "E","F", "F♯", "G", "G♯", "A", "A♯", "B"];
 
   // AUDIO CONTEXT
@@ -47,6 +48,16 @@ function UploadPage(props) {
     const htmlAudioElement = demoRef.current;
     const source = audioContext.createMediaElementSource(htmlAudioElement);
 
+    //LOWPASS FILTER
+    let filter = audioContext.createBiquadFilter();
+    filter.type = "lowpass";
+    filter.frequency.setValueAtTime(100, audioContext.currentTime, 0);
+    source.connect(filter);
+   /*  filter.connect(audioContext.destination) */
+    //LOWPASS FILTER
+
+
+    //
     source.connect(audioContext.destination);
 
     if (typeof Meyda === "undefined") {
@@ -105,7 +116,7 @@ function UploadPage(props) {
           setMfcc(features.mfcc);
           setComplexSpectrum(features.complexSpectrum);
 
-
+          console.dir("regular" + features.energy)
           
           setColor(
             color
@@ -119,6 +130,37 @@ function UploadPage(props) {
       });
       analyzer.start();
     }
+
+    if (typeof Meyda === "undefined") {
+      console.log("Meyda could not be found! Have you included it?");
+    } else {
+      console.log("Meyda exist!");
+      const lowPassAnalyzer = Meyda.createMeydaAnalyzer({
+        audioContext: audioContext,
+        source: filter,
+        bufferSize: 512 * 4,
+        featureExtractors: [
+        
+          "energy",
+          
+        ],
+        callback: (features) => {
+          console.dir("lowpass" + features.energy)
+          if(features.energy > 60){
+            setBeat(value => !value)
+          }
+
+
+          
+         
+        },
+      });
+      lowPassAnalyzer.start();
+    }
+  
+
+
+
   }, [audio]);
 
   const addFile = (e) => {
@@ -165,6 +207,7 @@ function UploadPage(props) {
         <li>Chroma : <div className="chromaDiv">{keys.map((element, index)=>{
           return <div className="chromaKeys" key={element} style={{opacity: chroma[index], fontWeight: chroma[index]*1000}}>{element}</div>
         })}</div></li>
+        <div className="beatDiv" style={ beat ? { background:'red'} :  { background:'blue'}}></div>
       </ul>
 
       <div className="coverScreen">
