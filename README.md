@@ -17,6 +17,8 @@ Clone the repository.
 If you want to use the Spotify functionality you need to [Create a Spotify App ](https://developer.spotify.com/dashboard/login) to get access to you client and secret key. Create a .env file in the server folder with the following variables:
 
 ```sh
+REACT_APP_CLIENT_KEY = <"YOUR CLIENT KEY">
+REACT_APP_SECRET_KEY = <"YOUR SECRET CLIENT KEY">
 CLIENT_KEY = <"YOUR CLIENT KEY">
 SECRET_KEY = <"YOUR SECRET CLIENT KEY">
 ```
