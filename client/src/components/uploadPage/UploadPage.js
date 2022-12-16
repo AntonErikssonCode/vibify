@@ -40,7 +40,7 @@ function UploadPage(props) {
   const [audio, setAudio] = useState(demoTune);
   const [beat, setBeat] = useState(false);
   const keys = ["C", "C♯", "D", "D♯", "E","F", "F♯", "G", "G♯", "A", "A♯", "B"];
-
+  const hzCutOff = 200;
   // AUDIO CONTEXT
   useEffect(() => {
     console.dir(audio);
@@ -51,7 +51,7 @@ function UploadPage(props) {
     //LOWPASS FILTER
     let filter = audioContext.createBiquadFilter();
     filter.type = "lowpass";
-    filter.frequency.setValueAtTime(100, audioContext.currentTime, 0);
+    filter.frequency.setValueAtTime(hzCutOff, audioContext.currentTime, 0);
     source.connect(filter);
    /*  filter.connect(audioContext.destination) */
     //LOWPASS FILTER
@@ -146,10 +146,12 @@ function UploadPage(props) {
         ],
         callback: (features) => {
           console.dir("lowpass" + features.energy)
-          if(features.energy > 60){
-            setBeat(value => !value)
+          if(features.energy > 50){
+            setBeat(true)
           }
-
+          else{
+            setBeat(false)
+          }
 
           
          
@@ -207,6 +209,7 @@ function UploadPage(props) {
         <li>Chroma : <div className="chromaDiv">{keys.map((element, index)=>{
           return <div className="chromaKeys" key={element} style={{opacity: chroma[index], fontWeight: chroma[index]*1000}}>{element}</div>
         })}</div></li>
+        <li>Lowpassfilter ({hzCutOff} hz) energy beattracker: </li>
         <div className="beatDiv" style={ beat ? { background:'red'} :  { background:'blue'}}></div>
       </ul>
 
