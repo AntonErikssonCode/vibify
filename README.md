@@ -19,6 +19,7 @@ If you want to use the Spotify functionality you need to [Create a Spotify App ]
 ```sh
 REACT_APP_CLIENT_KEY = <"YOUR CLIENT KEY">
 REACT_APP_SECRET_KEY = <"YOUR SECRET CLIENT KEY">
+
 CLIENT_KEY = <"YOUR CLIENT KEY">
 SECRET_KEY = <"YOUR SECRET CLIENT KEY">
 ```

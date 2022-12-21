@@ -23,6 +23,7 @@ function Dashboard({ code }) {
   const [bars, setBars] = useState([]);
   const [progression, setProgression] = useState(0);
   const [currentSection, setCurrentSection] = useState(0);
+  const [moveDirection, setMoveDirection] = useState(0);
 
   function chooseTrack(track) {
     spotifyApi.getAudioFeaturesForTrack(track.id).then(function (data) {
@@ -30,7 +31,6 @@ function Dashboard({ code }) {
       spotifyApi.getAudioAnalysisForTrack(track.id).then(function (data) {
         track.audio = data.body;
         setPlayingTrack(track);
-
         console.dir(track);
         setCanvas(true);
 
@@ -54,7 +54,6 @@ function Dashboard({ code }) {
   function getTempo() {
     console.dir(60 / playingTrack.features.tempo);
   }
-  const [moveDirection, setMoveDirection] = useState("right");
 
   useEffect(() => {
     let num = 0;
@@ -146,7 +145,6 @@ function Dashboard({ code }) {
             <p>Tempo: {playingTrack.features.tempo}</p>
             <p>Mode: {playingTrack.features.mode}</p>
             <p>Key: {playingTrack.features.key}</p>
-
           </div>
         ) : (
           " "
@@ -174,7 +172,7 @@ function Dashboard({ code }) {
         </div>
         <div className="dashboard-canvas">
           {canvas ? (
-            <OutputCanvas track={playingTrack} moveDirection={moveDirection} />
+            <OutputCanvas track={playingTrack} moveDirection={moveDirection} defaultSize={1} />
           ) : null}
         </div>
       </div>

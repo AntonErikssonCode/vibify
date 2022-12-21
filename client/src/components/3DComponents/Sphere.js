@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 
 function Sphere(props) {
@@ -10,22 +10,21 @@ function Sphere(props) {
   const [hovered, hover] = useState(false);
   const [clicked, click] = useState(false);
   // Subscribe this component to the render-loop, rotate the mesh every frame
-  
+
   let move = null;
-  const [size, setSize]= useState(1);
+  const [size, setSize] = useState(1);
 
   useFrame((state, delta) => {
-    if(props.moveDirection% 2 == 0){
-      setSize((prev) => size +0.01)
-    
+    if (props.moveDirection % 2 == 0) {
+      setSize((prev) => size + 0.01);
+    } else {
+      setSize((prev) => size - 0.01);
     }
-
-    else{
-      setSize((prev) => size -0.01)
-    }
-
   });
 
+  useEffect(() => {
+    setSize(1);
+  }, [props.track]);
   /* useFrame((state, delta) => (ref.current.position.z = 0.01)); */
   // Return the view, these are regular Threejs elements expressed in JSX
 
