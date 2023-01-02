@@ -14,7 +14,7 @@ function Login() {
  
   return (
     <div className="MenuItem-container">
-    <h2 className="MenuItem-title">Use Spotify Audio And Features</h2>
+    <h2 className="MenuItem-title">Labeled Audio Features: Spotify Pipeline</h2>
     <a className="MenuItem-button" href={AUTH_URL}> Spotify Audio</a>
   </div>
   );
