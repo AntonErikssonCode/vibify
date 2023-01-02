@@ -10,7 +10,8 @@ Vibify is a React research project with the goal of visualizing audio in 3D. Sev
 
 ## Installation
 
-Vibify requires [Node.js](https://nodejs.org/) to run.
+Vibify requires [Node.js](https://nodejs.org/) to run. The Spotify functionality also requires Spotify premium. 
+
 
 Clone the repository. 
 

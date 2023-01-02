@@ -18,9 +18,9 @@ function Dashboard({ code }) {
   const [searchResults, setSearchResults] = useState([]);
   const [playingTrack, setPlayingTrack] = useState();
   const [canvas, setCanvas] = useState(false);
-  const [duration, setDuration] = useState(0);
+
   const [sections, setSections] = useState([]);
-  const [bars, setBars] = useState([]);
+
   const [progression, setProgression] = useState(0);
   const [currentSection, setCurrentSection] = useState(0);
   const [moveDirection, setMoveDirection] = useState(0);
@@ -40,13 +40,9 @@ function Dashboard({ code }) {
           })
         );
 
-        setBars(
-          track.audio.bars.map((bar) => {
-            return bar.duration;
-          })
-        );
+        
 
-        setDuration(track.audio.track.duration);
+       
       });
     });
   }
