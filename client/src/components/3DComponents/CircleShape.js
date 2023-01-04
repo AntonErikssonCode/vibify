@@ -60,9 +60,9 @@ function CircleShape(props) {
   }, []);
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
-    const x = radie * Math.sin((-t * rotationSpeed +variation.x)/*  * variation.x */) + variation.x/2;
+    const x = radie * Math.sin((-t * rotationSpeed +variation.x) * variation.x) + variation.x/2;
     const y =  Math.cos(props.angle) * x ;
-    const z = radie * Math.cos((-t * rotationSpeed +  variation.z) /* * variation.z */) + variation.z/2;
+    const z = radie * Math.cos((-t * rotationSpeed +  variation.z) * variation.z) + variation.z/2;
     mesh.current.position.x = x;
     mesh.current.position.y = y;
     mesh.current.position.z = z;

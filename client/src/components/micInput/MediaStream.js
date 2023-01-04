@@ -56,7 +56,7 @@ function MediaStream(props) {
         <spotLight position={[0, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -10, -10]} />
         <ResponsiveShape
-          loudness={loudness}
+          loudness={loudness+50}
           meshColor={baseColor}
           renderCounter={0}
         />

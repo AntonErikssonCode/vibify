@@ -223,8 +223,309 @@ function UploadPage(props) {
             meshColor={color}
             renderCounter={renderCounter}
           />
+{/* 
+<CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={0}
+          />
 
-          {/* 
+          <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={90}
+          />
+
+          <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={45}
+          />
+           <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={900}
+        />
+        
+        <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={123}
+        />
+         <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={-45}
+        />
+        
+        <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={0}
+          />
+
+          <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={90}
+          />
+
+          <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={45}
+          />
+           <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={900}
+        />
+        
+        <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={123}
+        />
+         <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={-45}
+        />
+        
+        <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={0}
+          />
+
+          <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={90}
+          />
+
+          <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={45}
+          />
+           <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={900}
+        />
+        
+        <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={123}
+        />
+         <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={-45}
+        />
+        
+        <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={0}
+          />
+
+          <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={90}
+          />
+
+          <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={45}
+          />
+           <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={900}
+        />
+        
+        <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={123}
+        />
+         <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={-45}
+        />
+        
+        <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={0}
+          />
+
+          <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={90}
+          />
+
+          <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={45}
+          />
+           <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={900}
+        />
+        
+        <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={123}
+        />
+         <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={-45}
+        />
+        
+        <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={0}
+          />
+
+          <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={90}
+          />
+
+          <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={45}
+          />
+           <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={900}
+        />
+        
+        <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={123}
+        />
+         <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={-45}
+        />
+        
+        <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={0}
+          />
+
+          <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={90}
+          />
+
+          <CircleShape
+            ref={CircleShape}
+            renderCounter={renderCounter}
+            spectralSkewness={spectralSkewness}
+            yAngle={0.5}
+            angle={45}
+          />
+           <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={900}
+        />
+        
+        <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={123}
+        />
+         <CircleShape
+          renderCounter={renderCounter}
+          spectralSkewness={spectralSkewness}
+          yAngle={0.5}
+          angle={-45}
+        />
+        
+
           <CircleShape
             ref={CircleShape}
             renderCounter={renderCounter}
@@ -266,7 +567,8 @@ function UploadPage(props) {
           spectralSkewness={spectralSkewness}
           yAngle={0.5}
           angle={-45}
-        /> */}
+        />
+         */}
         </Canvas>
       </div>
     </div>
