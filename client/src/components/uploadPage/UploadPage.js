@@ -7,7 +7,9 @@ import ResponsiveShape from "../3DComponents/ResponsiveShape";
 import Color from "color";
 import CircleShape from "../3DComponents/CircleShape";
 import Test from "../3DComponents/Test";
-
+/* import Essentia from "https://cdn.jsdelivr.net/npm/essentia.js@0.1.3/dist/essentia.js-core.es.js";
+import { EssentiaWASM } from "https://cdn.jsdelivr.net/npm/essentia.js@0.1.3/dist/essentia-wasm.es.js";
+ */
 function UploadPage(props) {
   const demoRef = useRef(null);
   const [rms, setRms] = useState(0);
@@ -55,9 +57,35 @@ function UploadPage(props) {
   // AUDIO CONTEXT
   useEffect(() => {
     console.dir(audio);
+    /* const essentia = new Essentia(EssentiaWASM); */
+    /* let essentia = new Essentia(EssentiaWASM); */
+   /*  let audioBuffer; */
     const audioContext = new AudioContext();
     const htmlAudioElement = demoRef.current;
     const source = audioContext.createMediaElementSource(htmlAudioElement);
+
+    //essentia.js test
+    /* let audioURL =
+      "http://localhost:3000/static/media/track1.39654edfe8e4e0ee517c.mp3";
+    const fetchData = async () => {
+      audioBuffer = await essentia.getAudioBufferFromURL(
+        audioURL,
+        audioContext
+      );
+      const inputSignalVector = essentia.arrayToVector(
+        audioBuffer.getChannelData(0)
+      );
+      let outputRG = essentia.ReplayGain(
+        inputSignalVector, // input
+        44100
+      ); // sampleRate (parameter optional)
+      console.log(outputRG.replayGain);
+
+      essentia.shutdown();
+
+      essentia.delete();
+    };
+    fetchData().catch(console.error); */
 
     //LOWPASS FILTER
     let filter = audioContext.createBiquadFilter();
@@ -140,7 +168,7 @@ function UploadPage(props) {
         bufferSize: 512 * 4,
         featureExtractors: ["energy"],
         callback: (features) => {
-          console.dir("lowpass" + features.energy);
+          /*   console.dir("lowpass" + features.energy); */
           if (features.energy > 50) {
             setBeat(true);
           } else {
@@ -223,7 +251,7 @@ function UploadPage(props) {
             meshColor={color}
             renderCounter={renderCounter}
           />
-{/* 
+          {/* 
 <CircleShape
             ref={CircleShape}
             renderCounter={renderCounter}
