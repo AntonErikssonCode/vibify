@@ -7,9 +7,22 @@ import ResponsiveShape from "../3DComponents/ResponsiveShape";
 import Color from "color";
 import CircleShape from "../3DComponents/CircleShape";
 import Test from "../3DComponents/Test";
-/* import Essentia from "https://cdn.jsdelivr.net/npm/essentia.js@0.1.3/dist/essentia.js-core.es.js";
-import { EssentiaWASM } from "https://cdn.jsdelivr.net/npm/essentia.js@0.1.3/dist/essentia-wasm.es.js";
+import * as tf from "@tensorflow/tfjs";
+
+// Works core
+/* import Essentia from "essentia.js/dist/essentia.js-core.es.js";
  */
+import { EssentiaWASM } from "https://cdn.jsdelivr.net/npm/essentia.js@0.1.3/dist/essentia-wasm.es.js";
+
+// Model
+import {
+  TensorflowMusiCNN,
+  EssentiaTFInputExtractor,
+} from "essentia.js/dist/essentia.js-model.es.min.js";
+/* import { EssentiaWASM } from "https://cdn.jsdelivr.net/npm/essentia.js@0.1.3/dist/essentia-wasm.web.js";
+ */ /* console.dir(EssentiaWASM) */
+/* const essentia = new Essentia(EssentiaWASM); */
+
 function UploadPage(props) {
   const demoRef = useRef(null);
   const [rms, setRms] = useState(0);
@@ -54,39 +67,55 @@ function UploadPage(props) {
   ];
   const hzCutOff = 200;
 
+  const audioCtx = new AudioContext();
+
+  const modelURL = "./msd-musicnn-1/model.json";
+  let extractor = null;
+  let musicnn = new TensorflowMusiCNN(tf, modelURL, true);
+
+  /* useEffect(async ()=>{
+      await musicnn.initialize();
+      let predictions
+    }); */
+
+  const audioURL =
+    "https://freesound.org/data/previews/277/277325_4548252-lq.mp3";
+
+  useEffect(() => {
+   
+    async function fetchData() {
+      let hej  = await EssentiaWASM();
+      /* EssentiaWASM().then(wasmModule => {
+        extractor = new EssentiaTFInputExtractor(wasmModule, "musicnn", false);
+        // fetch audio and decode, then analyse
+        extractor.getAudioBufferFromURL(audioURL, audioCtx).then(analyse);
+      });
+ */
+    }
+    fetchData();
+  });
+ 
+
+  async function analyse(buffer) {
+    const audioData = await extractor.downsampleAudioBuffer(buffer);
+    const features = await extractor.computeFrameWise(audioData, 256);
+    await musicnn.initialize();
+    const predictions = await musicnn.predict(features, true);
+  
+    // creates a new div to display the predictions and appends to DOM
+    console.dir(predictions); 
+  }
+
+
+
+
   // AUDIO CONTEXT
   useEffect(() => {
-    console.dir(audio);
-    /* const essentia = new Essentia(EssentiaWASM); */
-    /* let essentia = new Essentia(EssentiaWASM); */
-   /*  let audioBuffer; */
     const audioContext = new AudioContext();
     const htmlAudioElement = demoRef.current;
     const source = audioContext.createMediaElementSource(htmlAudioElement);
 
-    //essentia.js test
-    /* let audioURL =
-      "http://localhost:3000/static/media/track1.39654edfe8e4e0ee517c.mp3";
-    const fetchData = async () => {
-      audioBuffer = await essentia.getAudioBufferFromURL(
-        audioURL,
-        audioContext
-      );
-      const inputSignalVector = essentia.arrayToVector(
-        audioBuffer.getChannelData(0)
-      );
-      let outputRG = essentia.ReplayGain(
-        inputSignalVector, // input
-        44100
-      ); // sampleRate (parameter optional)
-      console.log(outputRG.replayGain);
-
-      essentia.shutdown();
-
-      essentia.delete();
-    };
-    fetchData().catch(console.error); */
-
+ 
     //LOWPASS FILTER
     let filter = audioContext.createBiquadFilter();
     filter.type = "lowpass";
